@@ -15,6 +15,10 @@ public class GameManager : MonoBehaviour
     public event EventHandler OnGameResume;
     public event EventHandler OnGameOver;
 
+    private int _currentLives;
+
+    [SerializeField] private Transform _transitionPrefab;
+
     private void Awake()
     {
         if (Instance == null)
@@ -45,6 +49,7 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         // Init de tout le jeu je sais pas on verra
+        _currentLives = 3;
         OnGameStart?.Invoke(this, EventArgs.Empty);
         MenuManager.Instance.DisplayMainMenu(false);
         Resume();
@@ -58,6 +63,20 @@ public class GameManager : MonoBehaviour
     public bool IsPlaying()
     {
         return _currentState == GameState.PLAY;
+    }
+
+    public int GetCurrentLives()
+    {
+        return _currentLives;
+    }
+
+    public void LoseLife()
+    {
+        _currentLives--;
+        if (_currentLives <= 0)
+        {
+            GameOver();
+        }
     }
 
     public void Menu()
@@ -99,5 +118,12 @@ public class GameManager : MonoBehaviour
         {
             Pause();
         }
+    }
+
+    public void SpawnTransition()
+    {
+        GameObject transition = Instantiate(_transitionPrefab, Camera.main.transform).gameObject;
+        transition.transform.localPosition = new Vector3(0, 0, 10);
+        Destroy(transition, 1.3f);
     }
 }

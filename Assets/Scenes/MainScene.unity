@@ -1513,6 +1513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f99ac946888cf64f9cacce93a00d5cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _transitionPrefab: {fileID: 7467587527526413746, guid: 3d6171e56bcdeba489a23f335951f250, type: 3}
 --- !u!4 &772273667
 Transform:
   m_ObjectHideFlags: 0
