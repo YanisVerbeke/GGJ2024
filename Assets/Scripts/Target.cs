@@ -27,6 +27,10 @@ public class Target : MonoBehaviour
 
         _agent.SetDestination(_target);
 
+        Vector2 movement = _agent.velocity.normalized;
+        float angleDirection = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, angleDirection);
+
         _newTargetTimer -= Time.deltaTime;
 
         if (_newTargetTimer <= 0)
