@@ -6,7 +6,11 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class QteManager : MonoBehaviour
+
+/// <summary>
+/// Qte manager without GameManager
+/// </summary>
+public class QteManagerDev : MonoBehaviour
 {
     private QTEInputActions _qteActions;
     private InputAction[] _qteInputs;
@@ -57,6 +61,7 @@ public class QteManager : MonoBehaviour
         _qteInputs[11] = _qteActions.QtePossibilities.qte_12;
 
         SelectNewInput();
+        Debug.Log("Start");
     }
 
     private void OnDisable()
@@ -64,25 +69,29 @@ public class QteManager : MonoBehaviour
         _qteActions.QtePossibilities.Disable();
     }
 
+    // Start is called before the first frame update
+    void Start()
+    {
+
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.Instance.IsQte())
-            return;
-
         _text.text = _currentQteCounter.ToString();
         if (!_won)
         {
             if (_selectedAction.triggered)
             {
+                Debug.Log("oui : " + _currentQteCounter);
                 PressedAnim();
                 _currentQteCounter--;
             }
 
             if (_currentQteCounter <= 0 && !_won)
             {
+                Debug.Log("assjhfghiuasdhgiasdgfiasfhgasdgpaisdgvpijebpibspbsljhbvbljdshbvsdbksdbvkjsbvkbskjkbsbfksdbfksdbfis");
                 _won = true;
-                GameManager.Instance.SwitchStateToRoaming();
             }
         }
 
