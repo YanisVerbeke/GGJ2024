@@ -514,8 +514,8 @@ Transform:
   m_GameObject: {fileID: 261318186}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -26.2552, y: -13.0613, z: 0}
-  m_LocalScale: {x: 12.119962, y: 12.98389, z: 1}
+  m_LocalPosition: {x: -13.13, y: -6.5087, z: 0}
+  m_LocalScale: {x: 6.0890684, y: 6.3704715, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 501874016}
@@ -813,7 +813,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 20, y: 20, z: 1}
+  m_LocalScale: {x: 10, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 501874016}
@@ -1326,7 +1326,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &757669024
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1798,7 +1798,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1074744174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1897,11 +1897,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4644390099258015547, guid: 7ce92ef8abd9ac74aa973bf7c3858b46, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.080089
+      value: 5.62
       objectReference: {fileID: 0}
     - target: {fileID: 4644390099258015547, guid: 7ce92ef8abd9ac74aa973bf7c3858b46, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.553137
+      value: 3.96
       objectReference: {fileID: 0}
     - target: {fileID: 4644390099258015547, guid: 7ce92ef8abd9ac74aa973bf7c3858b46, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2215,11 +2215,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4644390099258015547, guid: 7ce92ef8abd9ac74aa973bf7c3858b46, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13.7
+      value: -3.91
       objectReference: {fileID: 0}
     - target: {fileID: 4644390099258015547, guid: 7ce92ef8abd9ac74aa973bf7c3858b46, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.9
+      value: 1.42
       objectReference: {fileID: 0}
     - target: {fileID: 4644390099258015547, guid: 7ce92ef8abd9ac74aa973bf7c3858b46, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2554,8 +2554,8 @@ Transform:
   m_GameObject: {fileID: 1418139945}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.9573, y: -12.3121, z: 0}
-  m_LocalScale: {x: 16.029575, y: 13.4221735, z: 1}
+  m_LocalPosition: {x: 5.4847, y: -6.1502, z: 0}
+  m_LocalScale: {x: 7.878536, y: 6.6426334, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 501874016}
@@ -2701,8 +2701,8 @@ Transform:
   m_GameObject: {fileID: 1533776568}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.8135, y: 15.3447, z: 0}
-  m_LocalScale: {x: 14.39, y: 9.109592, z: 1}
+  m_LocalPosition: {x: -0.5055, y: 7.7743, z: 0}
+  m_LocalScale: {x: 7.318754, y: 4.561173, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 501874016}
@@ -2848,8 +2848,8 @@ Transform:
   m_GameObject: {fileID: 1635483988}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 28.2216, y: 10.1234, z: 0}
-  m_LocalScale: {x: 13.352482, y: 16.302526, z: 1}
+  m_LocalPosition: {x: 14.0185, y: 5.1754, z: 0}
+  m_LocalScale: {x: 6.5302606, y: 8.151778, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 501874016}
@@ -3216,8 +3216,8 @@ Transform:
   m_GameObject: {fileID: 1846576683}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -32.422, y: 11.8119, z: 0}
-  m_LocalScale: {x: 10.756466, y: 11.659533, z: 1}
+  m_LocalPosition: {x: -16.3076, y: 5.9914, z: 0}
+  m_LocalScale: {x: 5.241626, y: 5.5965753, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 501874016}

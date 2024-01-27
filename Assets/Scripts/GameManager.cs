@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Menu();
+        //StartGame();
     }
 
     private void Update()
@@ -63,6 +64,7 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
         _currentState = GameState.MENU;
+        MenuManager.Instance.DisplayMainMenu(true);
     }
 
     public void Resume()
