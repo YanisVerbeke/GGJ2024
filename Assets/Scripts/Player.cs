@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
 
     private Rigidbody2D _rigidbody;
 
-    [SerializeField] private Transform _handTransform;
+    [SerializeField] private GameObject _hand;
 
     private void Awake()
     {
@@ -34,16 +34,16 @@ public class Player : MonoBehaviour
         if (!_isHandThrown && !_isHandComing)
         {
             Vector2 handDirection = Vector2.ClampMagnitude(Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position, 1f);
-            _handTransform.position = (Vector2)transform.position + handDirection;
+            _hand.transform.position = (Vector2)transform.position + handDirection;
             float handAngle = Mathf.Atan2(handDirection.y, handDirection.x) * Mathf.Rad2Deg;
-            _handTransform.rotation = Quaternion.Euler(0, 0, handAngle);
+            _hand.transform.rotation = Quaternion.Euler(0, 0, handAngle);
         }
 
 
         if (_handThrowTimer >= 0f)
         {
             _isHandThrown = true;
-            _handTransform.position += (Vector3)(_handDirection * _speed * 4f * Time.deltaTime);
+            _hand.transform.position += (Vector3)(_handDirection * _speed * 4f * Time.deltaTime);
             _handThrowTimer -= Time.deltaTime;
         }
         else
@@ -57,18 +57,20 @@ public class Player : MonoBehaviour
 
         if (_isHandComing)
         {
-            _handTransform.position += (transform.position - _handTransform.position) * _speed * 2f * Time.deltaTime;
-            if (Vector2.Distance(_handTransform.position, transform.position) <= 2f)
+            _hand.transform.position += (transform.position - _hand.transform.position) * _speed * 2f * Time.deltaTime;
+            if (Vector2.Distance(_hand.transform.position, transform.position) <= 2f)
             {
                 _isHandComing = false;
             }
         }
+
+        _hand.GetComponent<PlayerHand>().IsHandThrown = _isHandThrown || _isHandComing;
     }
 
 
     private void FixedUpdate()
     {
-        if (!GameManager.Instance.IsPlaying())
+        if (!GameManager.Instance.IsRoaming())
             return;
 
         _rigidbody.velocity = _inputValue * _speed;
@@ -85,7 +87,7 @@ public class Player : MonoBehaviour
     {
         if (!_isHandThrown && !_isHandComing)
         {
-            _handDirection = (_handTransform.position - transform.position).normalized;
+            _handDirection = (_hand.transform.position - transform.position).normalized;
             _handThrowTimer = _handThrowTimerValue;
         }
     }

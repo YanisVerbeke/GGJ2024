@@ -83,7 +83,7 @@ public class QteManager : MonoBehaviour
             if (_currentQteCounter <= 0 && !_won)
             {
                 _won = true;
-                GameManager.Instance.SwitchToRoamingMode();
+                GameManager.Instance.SwitchStateToRoaming();
                 Debug.Log("Yay you won");
             }
         }

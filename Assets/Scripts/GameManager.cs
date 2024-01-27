@@ -7,13 +7,17 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public enum GameState { MENU, PAUSE, PLAY, GAMEOVER }
+    public enum GameState { MENU, PAUSE, ROAMING, QTE, GAMEOVER }
     private GameState _currentState;
+    private GameState _lastPlayedState;
 
     public event EventHandler OnGameStart;
     public event EventHandler OnGamePause;
     public event EventHandler OnGameResume;
     public event EventHandler OnGameOver;
+
+    [SerializeField] private GameObject _roamingScene;
+    [SerializeField] private GameObject _qteScene;
 
     private void Awake()
     {
@@ -47,6 +51,7 @@ public class GameManager : MonoBehaviour
         // Init de tout le jeu je sais pas on verra
         OnGameStart?.Invoke(this, EventArgs.Empty);
         MenuManager.Instance.DisplayMainMenu(false);
+        SwitchStateToRoaming();
         Resume();
     }
 
@@ -57,7 +62,34 @@ public class GameManager : MonoBehaviour
 
     public bool IsPlaying()
     {
-        return _currentState == GameState.PLAY;
+        return _currentState == GameState.QTE || _currentState == GameState.ROAMING;
+    }
+
+    public bool IsQte()
+    {
+        return _currentState == GameState.QTE;
+    }
+
+    public void SwitchStateToQte()
+    {
+        _currentState = GameState.QTE;
+        _lastPlayedState = _currentState;
+        _roamingScene.SetActive(false);
+        _qteScene.SetActive(true);
+    }
+
+    public bool IsRoaming()
+    {
+        return _currentState == GameState.ROAMING;
+    }
+
+    public void SwitchStateToRoaming()
+    {
+        _currentState = GameState.ROAMING;
+        _lastPlayedState = _currentState;
+        _roamingScene.SetActive(true);
+        _qteScene.SetActive(false);
+        Debug.Log("DESACTIVATE");
     }
 
     public void Menu()
@@ -70,7 +102,7 @@ public class GameManager : MonoBehaviour
     public void Resume()
     {
         Time.timeScale = 1;
-        _currentState = GameState.PLAY;
+        _currentState = _lastPlayedState;
         OnGameResume?.Invoke(this, EventArgs.Empty);
         MenuManager.Instance.DisplayPause(false);
     }
