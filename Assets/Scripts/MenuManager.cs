@@ -6,6 +6,8 @@ public class MenuManager : MonoBehaviour
 {
     public static MenuManager Instance { get; private set; }
 
+    [SerializeField] private GameObject _menuContainer;
+    [SerializeField] private GameObject _pauseContainer;
 
     private void Awake()
     {
@@ -17,13 +19,31 @@ public class MenuManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        DontDestroyOnLoad(this);
+    }
+
+
+    public void DisplayMainMenu(bool active)
+    {
+        _menuContainer.SetActive(active);
+        _pauseContainer.SetActive(false);
+    }
+
+    public void DisplayPause(bool active)
+    {
+        _pauseContainer.SetActive(active);
     }
 
 
 
     public void PlayButtonClicked()
     {
-        // JOUER AU JEU VIDEO
+        GameManager.Instance.StartGame();
+    }
+
+    public void ResumeButtonClicked()
+    {
+        GameManager.Instance.Resume();
     }
 
     public void QuitButtonClicked()

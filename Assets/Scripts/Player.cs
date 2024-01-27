@@ -27,6 +27,10 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        if (!GameManager.Instance.IsPlaying())
+            return;
+
+
         if (!_isHandThrown && !_isHandComing)
         {
             Vector2 handDirection = Vector2.ClampMagnitude(Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position, 1f);
@@ -64,6 +68,9 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!GameManager.Instance.IsPlaying())
+            return;
+
         _rigidbody.velocity = _inputValue * _speed;
         if (_rigidbody.velocity != Vector2.zero)
         {
@@ -106,6 +113,9 @@ public class Player : MonoBehaviour
 
     public void OnFire(InputValue value)
     {
+        if (!GameManager.Instance.IsPlaying())
+            return;
+
         ThrowHand();
     }
 }

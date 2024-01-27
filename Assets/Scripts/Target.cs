@@ -22,6 +22,9 @@ public class Target : MonoBehaviour
 
     private void Update()
     {
+        if (!GameManager.Instance.IsPlaying())
+            return;
+
         _agent.SetDestination(_target);
 
         _newTargetTimer -= Time.deltaTime;

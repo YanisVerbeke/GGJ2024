@@ -8,6 +8,9 @@ public class PlayerHand : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (!GameManager.Instance.IsPlaying())
+            return;
+
         if (collision.GetComponent<Target>() != null)
         {
             _player.TeleportToTarget(collision.transform);
