@@ -24,6 +24,9 @@ public class QteManager : MonoBehaviour
     private SpriteRenderer _qteSpriteRenderer;
 
     [SerializeField]
+    private Image _qteImage;
+
+    [SerializeField]
     private Sprite[] _sprites = new Sprite[12];
 
     [SerializeField]
@@ -76,7 +79,6 @@ public class QteManager : MonoBehaviour
         {
             if (_selectedAction.triggered)
             {
-                Debug.Log("action pressed");
                 _currentQteCounter--;
             }
 
@@ -84,7 +86,6 @@ public class QteManager : MonoBehaviour
             {
                 _won = true;
                 GameManager.Instance.SwitchStateToRoaming();
-                Debug.Log("Yay you won");
             }
         }
 
@@ -100,6 +101,7 @@ public class QteManager : MonoBehaviour
         _currentQteCounter = _baseQteCounter;
         int rand = Random.Range(0, 11);
         _selectedAction = _qteInputs[rand];
-        _qteSpriteRenderer.sprite = _sprites[rand];
+        //_qteSpriteRenderer.sprite = _sprites[rand];
+        _qteImage.sprite = _sprites[rand];
     }
 }
