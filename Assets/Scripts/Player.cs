@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     [SerializeField] private bool _isHandComing = false;
     private float _handThrowTimer;
     private const float _handThrowTimerValue = 0.3f;
-    private Vector2 _handDirection;
+    [SerializeField] private Vector2 _handDirection;
 
     private Rigidbody2D _rigidbody;
 
@@ -43,7 +43,7 @@ public class Player : MonoBehaviour
         if (_handThrowTimer >= 0f)
         {
             _isHandThrown = true;
-            _hand.transform.position += (Vector3)(_handDirection * _speed * 4f * Time.deltaTime);
+            _hand.transform.position += (Vector3)(_handDirection.normalized * _speed * 4f * Time.deltaTime);
             _handThrowTimer -= Time.deltaTime;
         }
         else
@@ -76,7 +76,7 @@ public class Player : MonoBehaviour
             _rigidbody.velocity = Vector2.zero;
             return;
         }
-            
+
 
         _rigidbody.velocity = _inputValue * _speed;
         if (_rigidbody.velocity != Vector2.zero)
@@ -104,6 +104,7 @@ public class Player : MonoBehaviour
             transform.position = (Vector2)target.position + Vector2.ClampMagnitude(transform.position - target.position, 2f);
             ResetHandThrow();
             GameManager.Instance.SwitchStateToQte();
+            Destroy(target.gameObject);
         }
     }
 
@@ -121,7 +122,7 @@ public class Player : MonoBehaviour
 
     public void OnFire(InputValue value)
     {
-        if (!GameManager.Instance.IsPlaying())
+        if (!GameManager.Instance.IsRoaming())
             return;
 
         ThrowHand();
