@@ -9,18 +9,24 @@ public class PlayerHand : MonoBehaviour
     private bool _isHandThrown;
     public bool IsHandThrown { get { return _isHandThrown; } set { _isHandThrown = value; } }
 
-    private int _cooldown;
+    private float _cooldown;
+
+    private void Update()
+    {
+        if (_cooldown >= 0f)
+        {
+            _cooldown -= Time.deltaTime;
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!GameManager.Instance.IsRoaming())
             return;
 
-        _cooldown = _cooldown <= 0 ? 0 : _cooldown - 1;
-
         if (collision.GetComponent<Target>() != null && _cooldown <= 0 && _isHandThrown)
         {
-            _cooldown = 10;
+            _cooldown = 1f;
             _player.TeleportToTarget(collision.transform);
             //collision.GetComponent<Target>().
         }
