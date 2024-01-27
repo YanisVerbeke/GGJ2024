@@ -94,6 +94,7 @@ public class Player : MonoBehaviour
     {
         if (_isHandThrown)
         {
+            GameManager.Instance.SpawnTransition();
             transform.position = (Vector2)target.position + Vector2.ClampMagnitude(transform.position - target.position, 2f);
             ResetHandThrow();
         }
