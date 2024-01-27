@@ -17,7 +17,7 @@ public class Target : MonoBehaviour
         _agent.updateRotation = false;
         _agent.updateUpAxis = false;
 
-        _target = new Vector2(Random.Range(-20f, 20f), Random.Range(-10f, 10f));
+        _target = new Vector2(Random.Range(-23f, 23f), Random.Range(-13f, 13f));
     }
 
     private void Update()
