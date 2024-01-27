@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class Target : MonoBehaviour
 {
+    private enum TargetSate {  };
+
     private Vector2 _target;
 
     private NavMeshAgent _agent;
@@ -22,7 +24,7 @@ public class Target : MonoBehaviour
 
     private void Update()
     {
-        if (!GameManager.Instance.IsRoaming())
+        if (!GameManager.Instance.IsRoaming()  )
             return;
 
         _agent.SetDestination(_target);
@@ -44,5 +46,10 @@ public class Target : MonoBehaviour
     {
         _target = new Vector2(Random.Range(-20f, 20f), Random.Range(-10f, 10f));
         _newTargetTimer = Random.Range(2f, 20f);
+    }
+
+    private void SetlaughingTarget()
+    {
+
     }
 }

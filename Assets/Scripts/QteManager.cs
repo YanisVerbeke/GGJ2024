@@ -101,7 +101,6 @@ public class QteManager : MonoBehaviour
         _currentQteCounter = _baseQteCounter;
         int rand = Random.Range(0, 11);
         _selectedAction = _qteInputs[rand];
-        //_qteSpriteRenderer.sprite = _sprites[rand];
         _qteImage.sprite = _sprites[rand];
     }
 }

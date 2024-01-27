@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (!GameManager.Instance.IsPlaying())
+        if (!GameManager.Instance.IsRoaming())
             return;
 
 
@@ -71,7 +71,12 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         if (!GameManager.Instance.IsRoaming())
+        {
+            _inputValue = Vector2.zero;
+            _rigidbody.velocity = Vector2.zero;
             return;
+        }
+            
 
         _rigidbody.velocity = _inputValue * _speed;
         if (_rigidbody.velocity != Vector2.zero)
@@ -98,6 +103,7 @@ public class Player : MonoBehaviour
         {
             transform.position = (Vector2)target.position + Vector2.ClampMagnitude(transform.position - target.position, 2f);
             ResetHandThrow();
+            GameManager.Instance.SwitchStateToQte();
         }
     }
 

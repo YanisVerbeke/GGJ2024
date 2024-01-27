@@ -22,7 +22,7 @@ public class PlayerHand : MonoBehaviour
         {
             _cooldown = 10;
             _player.TeleportToTarget(collision.transform);
-            GameManager.Instance.SwitchStateToQte();
+            //collision.GetComponent<Target>().
         }
     }
 }

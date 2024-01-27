@@ -16,8 +16,13 @@ public class GameManager : MonoBehaviour
     public event EventHandler OnGameResume;
     public event EventHandler OnGameOver;
 
+
     [SerializeField] private GameObject _roamingScene;
     [SerializeField] private GameObject _qteScene;
+    private int _currentLives;
+
+    [SerializeField] private Transform _transitionPrefab;
+    private float _transitionTime = 1.3f;
 
     private void Awake()
     {
@@ -49,6 +54,7 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         // Init de tout le jeu je sais pas on verra
+        _currentLives = 3;
         OnGameStart?.Invoke(this, EventArgs.Empty);
         MenuManager.Instance.DisplayMainMenu(false);
         SwitchStateToRoaming();
@@ -74,8 +80,8 @@ public class GameManager : MonoBehaviour
     {
         _currentState = GameState.QTE;
         _lastPlayedState = _currentState;
-        _roamingScene.SetActive(false);
-        _qteScene.SetActive(true);
+        SpawnTransition();
+        StartCoroutine(SwitchState(false, _transitionTime));
     }
 
     public bool IsRoaming()
@@ -87,9 +93,21 @@ public class GameManager : MonoBehaviour
     {
         _currentState = GameState.ROAMING;
         _lastPlayedState = _currentState;
-        _roamingScene.SetActive(true);
-        _qteScene.SetActive(false);
-        Debug.Log("DESACTIVATE");
+        StartCoroutine(SwitchState(true, 0));
+    }
+
+    public int GetCurrentLives()
+    {
+        return _currentLives;
+    }
+
+    public void LoseLife()
+    {
+        _currentLives--;
+        if (_currentLives <= 0)
+        {
+            GameOver();
+        }
     }
 
     public void Menu()
@@ -131,5 +149,19 @@ public class GameManager : MonoBehaviour
         {
             Pause();
         }
+    }
+
+    public void SpawnTransition()
+    {
+        GameObject transition = Instantiate(_transitionPrefab, Camera.main.transform).gameObject;
+        transition.transform.localPosition = new Vector3(0, 0, 10);
+        Destroy(transition, _transitionTime);
+    }
+
+    IEnumerator SwitchState(bool isRoaming, float transitionTime)
+    {
+        yield return new WaitForSeconds(transitionTime);
+        _roamingScene.SetActive(isRoaming);
+        _qteScene.SetActive(!isRoaming);
     }
 }
