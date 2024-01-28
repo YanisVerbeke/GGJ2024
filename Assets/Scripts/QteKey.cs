@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,6 +12,8 @@ public class QteKey : MonoBehaviour
     private QTEInputActions _qteActions;
     private InputAction[] _qteInputs;
     private InputAction _selectedAction;
+    private int _selectedRandom;
+    public int SelectedRandom { get { return _selectedRandom; } }
 
     // Sprites and animamtions
     private bool _isTurnedRight;
@@ -20,12 +23,10 @@ public class QteKey : MonoBehaviour
     private Sprite[] _sprites;
     [SerializeField]
     private Image _keySprite;
-    [SerializeField]
-    private TMP_Text _text;
 
     // Counter
     private int _baseQteCounter;
-    public int BaseQteCounter { get { return _baseQteCounter; } set {  _baseQteCounter = value; } }
+    public int BaseQteCounter { get { return _baseQteCounter; } set { _baseQteCounter = value; } }
     private int _currentQteCounter;
     public int CurrentQteCounter { get { return _currentQteCounter; } }
 
@@ -47,8 +48,9 @@ public class QteKey : MonoBehaviour
         _qteInputs[6] = _qteActions.QtePossibilities.qte_11;
         _qteInputs[7] = _qteActions.QtePossibilities.qte_12;
 
+        _selectedRandom = Random.Range(0, _qteInputs.Length);
         SelectNewInput();
-
+        PressedAnim();
     }
 
     private void OnDisable()
@@ -59,10 +61,10 @@ public class QteKey : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _text.text = _currentQteCounter.ToString();
 
         if (_selectedAction.triggered)
         {
+            SoundManager.Instance.PlayGoodKey();
             PressedAnim();
             _currentQteCounter--;
         }
@@ -71,13 +73,25 @@ public class QteKey : MonoBehaviour
     private void SelectNewInput()
     {
         _currentQteCounter = _baseQteCounter;
-        int rand = Random.Range(0, _qteInputs.Length);
-        _selectedAction = _qteInputs[rand];
-        _qteImage.sprite = _sprites[rand];
-        PressedAnim();
-
+        _selectedAction = _qteInputs[_selectedRandom];
+        _qteImage.sprite = _sprites[_selectedRandom];
     }
 
+    /// <summary>
+    /// If two qte keys are the same, retry with the assurance of not taking the same one
+    /// </summary>
+    public void SetNewInputAction()
+    {
+        Debug.Log(_qteInputs.Length);
+        int newRandom = _selectedRandom + Random.Range(0, 7);
+        Debug.Log("New R : " + newRandom);
+
+        int r =  newRandom > _qteInputs.Length ? newRandom - _qteInputs.Length : newRandom;
+        Debug.Log("R : " + r);
+
+        _selectedAction = _qteInputs[r];
+        _qteImage.sprite = _sprites[r];
+    }
 
     private void PressedAnim()
     {

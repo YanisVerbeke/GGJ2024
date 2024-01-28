@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class MenuManager : MonoBehaviour
 
     [SerializeField] private GameObject _menuContainer;
     [SerializeField] private GameObject _pauseContainer;
+    [SerializeField] private GameObject _gameOverContainer;
 
     private void Awake()
     {
@@ -19,7 +21,6 @@ public class MenuManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        DontDestroyOnLoad(this);
     }
 
 
@@ -27,6 +28,7 @@ public class MenuManager : MonoBehaviour
     {
         _menuContainer.SetActive(active);
         _pauseContainer.SetActive(false);
+        _gameOverContainer.SetActive(false);
     }
 
     public void DisplayPause(bool active)
@@ -34,20 +36,33 @@ public class MenuManager : MonoBehaviour
         _pauseContainer.SetActive(active);
     }
 
+    public void DisplayGameOver()
+    {
+        _gameOverContainer.SetActive(true);
+    }
 
 
     public void PlayButtonClicked()
     {
+        SoundManager.Instance.PlayButton();
         GameManager.Instance.StartGame();
     }
 
     public void ResumeButtonClicked()
     {
+        SoundManager.Instance.PlayButton();
         GameManager.Instance.Resume();
     }
 
     public void QuitButtonClicked()
     {
+        SoundManager.Instance.PlayButton();
+
         Application.Quit();
+    }
+
+    public void MenuButtonClicked()
+    {
+        SceneManager.LoadScene(0);
     }
 }

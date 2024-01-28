@@ -30,4 +30,16 @@ public class PlayerHand : MonoBehaviour
             _player.TeleportToTarget(collision.transform);
         }
     }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (!GameManager.Instance.IsRoaming())
+            return;
+        if (collision.GetComponent<Target>() != null && _cooldown <= 0 && _isHandThrown)
+        {
+            _cooldown = 1f;
+            GameManager.Instance.TargetDifficulty = collision.GetComponent<Target>().TargetDifficulty;
+            _player.TeleportToTarget(collision.transform);
+        }
+    }
 }
