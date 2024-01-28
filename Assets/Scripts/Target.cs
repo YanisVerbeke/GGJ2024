@@ -4,11 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class Target : MonoBehaviour
-{
-    private enum TargetSate { };
-
-    private TargetDifficulties[] _difficulties = new TargetDifficulties[3];
-
+{ 
     private Vector2 _target;
 
     private NavMeshAgent _agent;
@@ -25,10 +21,8 @@ public class Target : MonoBehaviour
         _agent.updateUpAxis = false;
 
         _target = new Vector2(Random.Range(-23f, 23f), Random.Range(-13f, 13f));
-        _difficulties[0] = TargetDifficulties.EASY;
-        _difficulties[1] = TargetDifficulties.MEDIUM;
-        _difficulties[2] = TargetDifficulties.HARD;
-        _targetDifficulty = _difficulties[Random.Range(0, _difficulties.Length)];
+        _targetDifficulty = WaveManager.Instance.GetRandDifficultyFromWaveNumber();
+        Debug.Log("Diificulty : " + _targetDifficulty);
     }
 
     private void Update()
@@ -55,10 +49,5 @@ public class Target : MonoBehaviour
     {
         _target = new Vector2(Random.Range(-20f, 20f), Random.Range(-10f, 10f));
         _newTargetTimer = Random.Range(2f, 20f);
-    }
-
-    private void SetlaughingTarget()
-    {
-
     }
 }

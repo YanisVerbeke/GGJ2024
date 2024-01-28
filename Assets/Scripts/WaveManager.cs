@@ -9,7 +9,8 @@ public class WaveManager : MonoBehaviour
 
     [SerializeField] private List<Transform> _waveSpawnerList;
 
-    private int _waveNumber = 1;
+    private int _waveNumber = 12;
+    public int WaveNumber { get { return _waveNumber; } }
 
     private List<GameObject> _unitToSpawn;
 
@@ -29,6 +30,10 @@ public class WaveManager : MonoBehaviour
 
     private float _waitTimeBetweenWaves = 4f;
 
+    private TargetDifficulties[] _difficulties = new TargetDifficulties[3];
+    private int[][] _difficultiesRandomizer = new int[10][];
+    private int[] _selectedDifficulty;
+
 
     private void Awake()
     {
@@ -43,6 +48,23 @@ public class WaveManager : MonoBehaviour
 
         _unitToSpawn = new();
         _unitInGame = new();
+
+        _difficulties[0] = TargetDifficulties.EASY;
+        _difficulties[1] = TargetDifficulties.MEDIUM;
+        _difficulties[2] = TargetDifficulties.HARD;
+
+        // Set Randomizer
+        _difficultiesRandomizer[0] = new int[2] { 70, 90 };
+        _difficultiesRandomizer[1] = new int[2] { 65, 75 };
+        _difficultiesRandomizer[2] = new int[2] { 60, 80 };
+        _difficultiesRandomizer[3] = new int[2] { 55, 80 };
+        _difficultiesRandomizer[4] = new int[2] { 50, 75 };
+        _difficultiesRandomizer[5] = new int[2] { 40, 65 };
+        _difficultiesRandomizer[6] = new int[2] { 30, 55 };
+        _difficultiesRandomizer[7] = new int[2] { 20, 50 };
+        _difficultiesRandomizer[8] = new int[2] { 10, 40 };
+        _difficultiesRandomizer[9] = new int[2] { 5, 35 };
+
     }
 
     private void Update()
@@ -84,8 +106,10 @@ public class WaveManager : MonoBehaviour
 
         SoundManager.Instance.PlayStartWave();
         _isWaveInProgress = true;
-
         _waveNumber++;
+        _selectedDifficulty = _waveNumber > _difficultiesRandomizer.Length ?
+            _difficultiesRandomizer[9] :
+            _difficultiesRandomizer[_waveNumber - 1];
     }
 
     private void SpawnUnit(GameObject unit)
@@ -106,6 +130,24 @@ public class WaveManager : MonoBehaviour
             _isWaveInProgress = false;
             OnWaveFinished?.Invoke(this, EventArgs.Empty);
             SoundManager.Instance.PlayWaveWin();
+        }
+    }
+
+    public TargetDifficulties GetRandDifficultyFromWaveNumber()
+    {
+        int rand = UnityEngine.Random.Range(0, 100);
+        Debug.Log(rand);
+        if(rand < _selectedDifficulty[0])
+        {
+            return TargetDifficulties.EASY;
+        } 
+        else if(rand >= _selectedDifficulty[0] && rand < _selectedDifficulty[1])
+        {
+            return TargetDifficulties.MEDIUM;
+        }
+        else
+        {
+            return TargetDifficulties.HARD;
         }
     }
 }
