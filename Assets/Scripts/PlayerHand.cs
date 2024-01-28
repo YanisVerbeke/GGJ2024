@@ -23,12 +23,11 @@ public class PlayerHand : MonoBehaviour
     {
         if (!GameManager.Instance.IsRoaming())
             return;
-
         if (collision.GetComponent<Target>() != null && _cooldown <= 0 && _isHandThrown)
         {
             _cooldown = 1f;
+            GameManager.Instance.TargetDifficulty = collision.GetComponent<Target>().TargetDifficulty;
             _player.TeleportToTarget(collision.transform);
-            //collision.GetComponent<Target>().
         }
     }
 }
