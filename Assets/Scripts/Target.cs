@@ -22,7 +22,6 @@ public class Target : MonoBehaviour
 
         _target = new Vector2(Random.Range(-23f, 23f), Random.Range(-13f, 13f));
         _targetDifficulty = WaveManager.Instance.GetRandDifficultyFromWaveNumber();
-        Debug.Log("Diificulty : " + _targetDifficulty);
     }
 
     private void Update()

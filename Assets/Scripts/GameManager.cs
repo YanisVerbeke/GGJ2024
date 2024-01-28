@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -23,6 +24,10 @@ public class GameManager : MonoBehaviour
     public TargetDifficulties TargetDifficulty { get { return _targetDifficulty; } set { _targetDifficulty = value; } }
 
     private int _currentLives;
+
+    private int _score = -1;
+    [SerializeField]
+    private TMP_Text _text;
 
     [SerializeField] private Transform _transitionPrefab;
     private float _transitionTime = 1.3f;
@@ -144,6 +149,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         _currentState = GameState.GAMEOVER;
+        _text.text = _score.ToString();
         OnGameOver?.Invoke(this, EventArgs.Empty);
         MenuManager.Instance.DisplayGameOver();
     }
@@ -166,6 +172,11 @@ public class GameManager : MonoBehaviour
         GameObject transition = Instantiate(_transitionPrefab, Camera.main.transform).gameObject;
         transition.transform.localPosition = new Vector3(0, 0, 10);
         Destroy(transition, _transitionTime);
+    }
+
+    public void Increasecore()
+    {
+        _score++;
     }
 
     IEnumerator SwitchRoamingState(float transitionTime)

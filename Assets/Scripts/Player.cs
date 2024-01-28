@@ -108,6 +108,7 @@ public class Player : MonoBehaviour
             ResetHandThrow();
             GameManager.Instance.SwitchStateToQte();
             WaveManager.Instance.RemoveUnitInGame(target.gameObject);
+            GameManager.Instance.Increasecore();
             Destroy(target.gameObject);
         }
     }

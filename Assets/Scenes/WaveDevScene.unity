@@ -885,6 +885,17 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &537334251 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5732190544204290171, guid: 3aca2be4c80af1242a7dde5e82b2820c, type: 3}
+  m_PrefabInstance: {fileID: 2622155091774231056}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1489,6 +1500,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _roamingScene: {fileID: 2065883462}
   _qteScene: {fileID: 1670507897}
+  _text: {fileID: 537334251}
   _transitionPrefab: {fileID: 7467587527526413746, guid: 3d6171e56bcdeba489a23f335951f250, type: 3}
 --- !u!4 &772273667
 Transform:
@@ -4181,29 +4193,9 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1011131692}
-    - target: {fileID: 3116215021975400384, guid: 3aca2be4c80af1242a7dde5e82b2820c, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: c89a8deef3dd9b44da76b3f27778017d, type: 3}
     - target: {fileID: 3365987226406593243, guid: 3aca2be4c80af1242a7dde5e82b2820c, type: 3}
       propertyPath: m_Name
       value: UIAndMenus
-      objectReference: {fileID: 0}
-    - target: {fileID: 4812530574265947897, guid: 3aca2be4c80af1242a7dde5e82b2820c, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 250
-      objectReference: {fileID: 0}
-    - target: {fileID: 4812530574265947897, guid: 3aca2be4c80af1242a7dde5e82b2820c, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 4812530574265947897, guid: 3aca2be4c80af1242a7dde5e82b2820c, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -760
-      objectReference: {fileID: 0}
-    - target: {fileID: 4812530574265947897, guid: 3aca2be4c80af1242a7dde5e82b2820c, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 440
       objectReference: {fileID: 0}
     - target: {fileID: 5660852041498302179, guid: 3aca2be4c80af1242a7dde5e82b2820c, type: 3}
       propertyPath: m_Pivot.x
@@ -4283,10 +4275,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5660852041498302179, guid: 3aca2be4c80af1242a7dde5e82b2820c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5710896108188451789, guid: 3aca2be4c80af1242a7dde5e82b2820c, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6278895749385675930, guid: 3aca2be4c80af1242a7dde5e82b2820c, type: 3}
