@@ -651,6 +651,7 @@ MonoBehaviour:
   - {fileID: 1170026872}
   _targetPrefab: {fileID: 3961319493600717748, guid: 7ce92ef8abd9ac74aa973bf7c3858b46, type: 3}
   _roamingScene: {fileID: 2065883463}
+  _unitInGame: []
 --- !u!4 &464294850
 Transform:
   m_ObjectHideFlags: 0
