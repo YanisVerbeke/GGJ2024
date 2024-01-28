@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject _roamingScene;
     [SerializeField] private GameObject _qteScene;
+    private TargetDifficulties _targetDifficulty;
+
     private int _currentLives;
 
     [SerializeField] private Transform _transitionPrefab;
@@ -81,7 +83,7 @@ public class GameManager : MonoBehaviour
         _currentState = GameState.QTE;
         _lastPlayedState = _currentState;
         SpawnTransition();
-        StartCoroutine(SwitchState(false, _transitionTime));
+        StartCoroutine(SwitchQteState(_transitionTime));
     }
 
     public bool IsRoaming()
@@ -93,7 +95,7 @@ public class GameManager : MonoBehaviour
     {
         _currentState = GameState.ROAMING;
         _lastPlayedState = _currentState;
-        StartCoroutine(SwitchState(true, 0));
+        StartCoroutine(SwitchRoamingState( 0));
     }
 
     public int GetCurrentLives()
@@ -158,10 +160,27 @@ public class GameManager : MonoBehaviour
         Destroy(transition, _transitionTime);
     }
 
-    IEnumerator SwitchState(bool isRoaming, float transitionTime)
+    IEnumerator SwitchRoamingState( float transitionTime)
     {
         yield return new WaitForSeconds(transitionTime);
-        _roamingScene.SetActive(isRoaming);
-        _qteScene.SetActive(!isRoaming);
+        _roamingScene.SetActive(true);
+        _qteScene.SetActive(false);
+    }
+    IEnumerator SwitchQteState( float transitionTime)
+    {
+        yield return new WaitForSeconds(transitionTime);
+        _roamingScene.SetActive(false);
+        _qteScene.SetActive(true);
+        Debug.Log(_qteScene);
+        Debug.Log(_qteScene.GetComponentInChildren<QteManager>());
+        Debug.Log(_targetDifficulty);
+
+
+        _qteScene.GetComponentInChildren<QteManager>().SetStatsFromDifficulty(_targetDifficulty);
+    }
+
+    public void SetCurrentDifficulty(TargetDifficulties difficulty)
+    {
+        _targetDifficulty = difficulty;
     }
 }
