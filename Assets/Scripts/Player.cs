@@ -92,9 +92,9 @@ public class Player : MonoBehaviour
     {
         if (!_isHandThrown && !_isHandComing)
         {
+            SoundManager.Instance.PlayLancer();
             _handDirection = (_hand.transform.position - transform.position).normalized;
             _handThrowTimer = _handThrowTimerValue;
-            SoundManager.Instance.PlayLancer();
         }
     }
 
@@ -106,6 +106,7 @@ public class Player : MonoBehaviour
             transform.position = (Vector2)target.position + Vector2.ClampMagnitude(transform.position - target.position, 2f);
             ResetHandThrow();
             GameManager.Instance.SwitchStateToQte();
+            WaveManager.Instance.RemoveUnitInGame(target.gameObject);
             Destroy(target.gameObject);
         }
     }

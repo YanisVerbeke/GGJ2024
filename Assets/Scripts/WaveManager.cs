@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,6 +21,12 @@ public class WaveManager : MonoBehaviour
 
     [SerializeField] private Transform _roamingScene;
 
+    private bool _isWaveInProgress;
+
+    [SerializeField] private List<GameObject> _unitInGame;
+
+    public event EventHandler OnWaveFinished;
+
 
     private void Awake()
     {
@@ -33,6 +40,7 @@ public class WaveManager : MonoBehaviour
         }
 
         _unitToSpawn = new();
+        _unitInGame = new();
     }
 
     private void Update()
@@ -51,33 +59,51 @@ public class WaveManager : MonoBehaviour
             }
         }
 
-        _waveCooldown -= Time.deltaTime;
+        if (!_isWaveInProgress)
+        {
+            _waveCooldown -= Time.deltaTime;
+        }
         if (_waveCooldown <= 0f)
         {
             // La wave se start avec un cooldown mais à terme faudra détecter quand la wave d'avant est finie et commencer à ce moment là
             StartNewWave();
-            _waveCooldown = 30f;
+            _waveCooldown = 10f;
         }
     }
 
     private void StartNewWave()
     {
-        int unitNumber = Random.Range(3, 6) * _waveNumber;
+        int unitNumber = UnityEngine.Random.Range(3, 6) * _waveNumber;
 
         for (int i = 0; i < unitNumber; i++)
         {
             _unitToSpawn.Add(_targetPrefab);
         }
 
+        SoundManager.Instance.PlayStartWave();
+        _isWaveInProgress = true;
+
         _waveNumber++;
     }
 
     private void SpawnUnit(GameObject unit)
     {
-        Transform spawnPoint = _waveSpawnerList[Random.Range(0, _waveSpawnerList.Count)];
+        Transform spawnPoint = _waveSpawnerList[UnityEngine.Random.Range(0, _waveSpawnerList.Count)];
 
-        Instantiate(unit, spawnPoint.position, Quaternion.identity, _roamingScene);
+        _unitInGame.Add(Instantiate(unit, spawnPoint.position, Quaternion.identity, _roamingScene));
 
         _unitToSpawn.Remove(unit);
+    }
+
+    public void RemoveUnitInGame(GameObject unit)
+    {
+        _unitInGame.Remove(unit);
+
+        if (_unitInGame.Count <= 0)
+        {
+            _isWaveInProgress = false;
+            OnWaveFinished?.Invoke(this, EventArgs.Empty);
+            SoundManager.Instance.PlayWaveWin();
+        }
     }
 }
