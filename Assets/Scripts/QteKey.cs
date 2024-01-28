@@ -84,10 +84,19 @@ public class QteKey : MonoBehaviour
     /// </summary>
     public void SetNewInputAction()
     {
-        if(_selectedAction == null || _qteInputs == null)
+        if (_qteInputs == null)
         {
-            StartCoroutine(JustWait(.5f));
+            _qteInputs = new InputAction[8];
+            _qteInputs[0] = _qteActions.QtePossibilities.qte_3;
+            _qteInputs[1] = _qteActions.QtePossibilities.qte_4;
+            _qteInputs[2] = _qteActions.QtePossibilities.qte_6;
+            _qteInputs[3] = _qteActions.QtePossibilities.qte_7;
+            _qteInputs[4] = _qteActions.QtePossibilities.qte_8;
+            _qteInputs[5] = _qteActions.QtePossibilities.qte_10;
+            _qteInputs[6] = _qteActions.QtePossibilities.qte_11;
+            _qteInputs[7] = _qteActions.QtePossibilities.qte_12;
         }
+
         int newRandom = Random.Range(0, 6);
         int r =  newRandom + _selectedRandom > _qteInputs.Length - 1 ? 
             _selectedRandom - newRandom : 
