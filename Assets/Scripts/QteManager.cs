@@ -134,7 +134,6 @@ public class QteManager : MonoBehaviour
 
     IEnumerator TimeCountdown(int timeLeft)
     {
-
         yield return new WaitForSeconds(1);
         if (timeLeft == 0) _lose = true;
         else StartCoroutine(TimeCountdown(timeLeft - 1));

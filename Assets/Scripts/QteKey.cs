@@ -20,8 +20,6 @@ public class QteKey : MonoBehaviour
     private Sprite[] _sprites;
     [SerializeField]
     private Image _keySprite;
-    [SerializeField]
-    private TMP_Text _text;
 
     // Counter
     private int _baseQteCounter;
@@ -59,7 +57,6 @@ public class QteKey : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _text.text = _currentQteCounter.ToString();
 
         if (_selectedAction.triggered)
         {
