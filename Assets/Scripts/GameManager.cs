@@ -119,6 +119,8 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         _currentState = GameState.MENU;
         MenuManager.Instance.DisplayMainMenu(true);
+        _roamingScene.SetActive(false);
+        _qteScene.SetActive(false);
     }
 
     public void Resume()
