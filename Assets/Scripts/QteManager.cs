@@ -42,12 +42,10 @@ public class QteManager : MonoBehaviour
         // Default
         int diff = GameManager.Instance.TargetDifficulty switch
         {
-            TargetDifficulties.EASY => 2,
-            TargetDifficulties.MEDIUM => 2,
+            TargetDifficulties.EASY => 0,
+            TargetDifficulties.MEDIUM => 1,
             _ => 2
         };
-
-        Debug.Log("diff : " + diff);
 
         _baseQteCounter = _basesQteCounterDifficulty[diff];
         _numberOfQte = _numberOfQteAtSameTimeDifficulty[diff];
@@ -61,7 +59,6 @@ public class QteManager : MonoBehaviour
                 _qteKeys[i].BaseQteCounter = _baseQteCounter;
                 active = true;
             }
-            Debug.Log("qte keys " + i + " active : " + active);
             _qteKeys[i].gameObject.SetActive(active);
         }
 
