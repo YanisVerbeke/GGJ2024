@@ -20,6 +20,8 @@ public class QteManager : MonoBehaviour
     [SerializeField]
     private int _baseQteCounter;
     private int[] _basesQteCounterDifficulty = new int[_numberOfDifficulties] { 5, 10, 5 };
+    private int _totalGlobalCount;
+    private int _currentGlobaCount;
 
     [SerializeField]
     private int _numberOfQte;
@@ -58,17 +60,20 @@ public class QteManager : MonoBehaviour
         _numberOfQte = _numberOfQteAtSameTimeDifficulty[diff];
         _secondsBeforeFailure = _secondsBeforeFailDifficulty[diff];
 
+        _totalGlobalCount = 0;
         for (int i = 0; i < _qteKeys.Length; i++)
         {
             bool active = false;
             if (i < _numberOfQte)
             {
                 _qteKeys[i].BaseQteCounter = _baseQteCounter;
+                _totalGlobalCount += _baseQteCounter;
                 active = true;
             }
             _qteKeys[i].gameObject.SetActive(active);
         }
 
+        _animator.SetTrigger("Level1");
         StartCoroutine(TimeCountdown(_secondsBeforeFailure));
     }
 
@@ -78,9 +83,12 @@ public class QteManager : MonoBehaviour
         if (!GameManager.Instance.IsQte())
             return;
 
+        // Count
         bool isOver = true;
+        _currentGlobaCount = 0;
         for (int i = 0; i < _numberOfQte; i++)
         {
+            _currentGlobaCount += _qteKeys[i].CurrentQteCounter;
             if (_qteKeys[i].CurrentQteCounter <= 0)
             {
                 _qteKeys[i].gameObject.SetActive(false);
@@ -91,20 +99,25 @@ public class QteManager : MonoBehaviour
                 isOver = false;
             }
 
-            if (_qteKeys[i].CurrentQteCounter <= 4)
-            {
-                _animator.SetTrigger("Level3");
-            }
-            else if (_qteKeys[i].CurrentQteCounter <= 8)
-            {
-                _animator.SetTrigger("Level2");
-            }
-            else
-            {
-                _animator.SetTrigger("Level1");
-            }
+
+        }
+        Debug.Log(_currentGlobaCount);
+
+        // Laugh animation
+        if (_currentGlobaCount <= _totalGlobalCount * 40 /100) //40%
+        {
+            _animator.SetTrigger("Level3");
+        }
+        else if (_currentGlobaCount <= _totalGlobalCount * 80 / 100) // 80%
+        {
+            _animator.SetTrigger("Level2");
+        }
+        else
+        {
+            _animator.SetTrigger("Level1");
         }
 
+        // Win or Lose
         if (isOver && !_won)
         {
             _won = true;

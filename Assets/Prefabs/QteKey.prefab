@@ -226,15 +226,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _qteImage: {fileID: 5437848941398432502}
   _sprites:
-  - {fileID: 2001700989, guid: b8bf6a23bad70ac488519fe7e2383f51, type: 3}
-  - {fileID: 1797289605, guid: b8bf6a23bad70ac488519fe7e2383f51, type: 3}
   - {fileID: 2055405704, guid: b8bf6a23bad70ac488519fe7e2383f51, type: 3}
   - {fileID: -362052859, guid: b8bf6a23bad70ac488519fe7e2383f51, type: 3}
-  - {fileID: 1312009594, guid: b8bf6a23bad70ac488519fe7e2383f51, type: 3}
   - {fileID: -516680248, guid: b8bf6a23bad70ac488519fe7e2383f51, type: 3}
   - {fileID: 1276590502, guid: b8bf6a23bad70ac488519fe7e2383f51, type: 3}
   - {fileID: 66210673, guid: b8bf6a23bad70ac488519fe7e2383f51, type: 3}
-  - {fileID: -1900956161, guid: b8bf6a23bad70ac488519fe7e2383f51, type: 3}
   - {fileID: 1130426038, guid: b8bf6a23bad70ac488519fe7e2383f51, type: 3}
   - {fileID: -739046195, guid: b8bf6a23bad70ac488519fe7e2383f51, type: 3}
   - {fileID: 1287463664, guid: b8bf6a23bad70ac488519fe7e2383f51, type: 3}

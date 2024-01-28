@@ -17,7 +17,7 @@ public class QteKey : MonoBehaviour
     [SerializeField]
     private Image _qteImage;
     [SerializeField]
-    private Sprite[] _sprites = new Sprite[12];
+    private Sprite[] _sprites;
     [SerializeField]
     private Image _keySprite;
     [SerializeField]
@@ -37,19 +37,15 @@ public class QteKey : MonoBehaviour
         }
         _qteActions.QtePossibilities.Enable();
 
-        _qteInputs = new InputAction[12];
-        _qteInputs[0] = _qteActions.QtePossibilities.qte_1;
-        _qteInputs[1] = _qteActions.QtePossibilities.qte_2;
-        _qteInputs[2] = _qteActions.QtePossibilities.qte_3;
-        _qteInputs[3] = _qteActions.QtePossibilities.qte_4;
-        _qteInputs[4] = _qteActions.QtePossibilities.qte_5;
-        _qteInputs[5] = _qteActions.QtePossibilities.qte_6;
-        _qteInputs[6] = _qteActions.QtePossibilities.qte_7;
-        _qteInputs[7] = _qteActions.QtePossibilities.qte_8;
-        _qteInputs[8] = _qteActions.QtePossibilities.qte_9;
-        _qteInputs[9] = _qteActions.QtePossibilities.qte_10;
-        _qteInputs[10] = _qteActions.QtePossibilities.qte_11;
-        _qteInputs[11] = _qteActions.QtePossibilities.qte_12;
+        _qteInputs = new InputAction[8];
+        _qteInputs[0] = _qteActions.QtePossibilities.qte_3;
+        _qteInputs[1] = _qteActions.QtePossibilities.qte_4;
+        _qteInputs[2] = _qteActions.QtePossibilities.qte_6;
+        _qteInputs[3] = _qteActions.QtePossibilities.qte_7;
+        _qteInputs[4] = _qteActions.QtePossibilities.qte_8;
+        _qteInputs[5] = _qteActions.QtePossibilities.qte_10;
+        _qteInputs[6] = _qteActions.QtePossibilities.qte_11;
+        _qteInputs[7] = _qteActions.QtePossibilities.qte_12;
 
         SelectNewInput();
 
