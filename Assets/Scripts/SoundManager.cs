@@ -20,6 +20,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip _goodKey;
     [SerializeField] private AudioClip _badKey;
     [SerializeField] private AudioClip _phase2;
+    [SerializeField] private AudioClip _transition;
 
     private AudioSource _audioSource;
 
@@ -98,5 +99,8 @@ public class SoundManager : MonoBehaviour
         _audioSource.PlayOneShot(_phase2);
     }
 
-
+    public void PlayTransition()
+    {
+        _audioSource.PlayOneShot(_transition);
+    }
 }

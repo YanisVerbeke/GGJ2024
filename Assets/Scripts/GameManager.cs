@@ -96,7 +96,7 @@ public class GameManager : MonoBehaviour
     {
         _currentState = GameState.ROAMING;
         _lastPlayedState = _currentState;
-        StartCoroutine(SwitchRoamingState( 0));
+        StartCoroutine(SwitchRoamingState(0));
     }
 
     public int GetCurrentLives()
@@ -156,19 +156,20 @@ public class GameManager : MonoBehaviour
 
     public void SpawnTransition()
     {
+        SoundManager.Instance.PlayTransition();
         GameObject transition = Instantiate(_transitionPrefab, Camera.main.transform).gameObject;
         transition.transform.localPosition = new Vector3(0, 0, 10);
         Destroy(transition, _transitionTime);
     }
 
-    IEnumerator SwitchRoamingState( float transitionTime)
+    IEnumerator SwitchRoamingState(float transitionTime)
     {
         yield return new WaitForSeconds(transitionTime);
         _roamingScene.SetActive(true);
         _qteScene.SetActive(false);
     }
 
-    IEnumerator SwitchQteState( float transitionTime)
+    IEnumerator SwitchQteState(float transitionTime)
     {
         yield return new WaitForSeconds(transitionTime);
         _roamingScene.SetActive(false);

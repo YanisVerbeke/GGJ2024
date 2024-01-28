@@ -2895,6 +2895,7 @@ MonoBehaviour:
   _goodKey: {fileID: 8300000, guid: 6545c2d2e26cf6646a954f82792d8256, type: 3}
   _badKey: {fileID: 8300000, guid: ecc65c044c375e84fa422f56ef3a8d98, type: 3}
   _phase2: {fileID: 8300000, guid: aa991732a06680b4ea686dd5ca0b789f, type: 3}
+  _transition: {fileID: 8300000, guid: 62b6fc494654b6046aec29184b72c5ca, type: 3}
 --- !u!1 &1170026871
 GameObject:
   m_ObjectHideFlags: 0
