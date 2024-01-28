@@ -134,7 +134,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isHandThrown: 0
   _isHandComing: 0
-  _handTransform: {fileID: 0}
+  _handDirection: {x: 0, y: 0}
+  _hand: {fileID: 0}
 --- !u!114 &5016314315783508806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,7 +191,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &2701313322391185517
 BoxCollider2D:
