@@ -11,6 +11,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject _pauseContainer;
     [SerializeField] private GameObject _gameOverContainer;
     [SerializeField] private GameObject _uiPlayContainer;
+    [SerializeField] private GameObject _creditContainer;
 
     private void Awake()
     {
@@ -31,11 +32,17 @@ public class MenuManager : MonoBehaviour
         _pauseContainer.SetActive(false);
         _gameOverContainer.SetActive(false);
         _uiPlayContainer.SetActive(false);
+        _creditContainer.SetActive(false);
     }
 
     public void DisplayPause(bool active)
     {
         _pauseContainer.SetActive(active);
+    }
+
+    public void DisplayCredit()
+    {
+        _creditContainer.SetActive(true);
     }
 
     public void DisplayGameOver()
@@ -70,6 +77,22 @@ public class MenuManager : MonoBehaviour
 
     public void MenuButtonClicked()
     {
+        SoundManager.Instance.PlayButton();
+
         SceneManager.LoadScene(0);
+    }
+
+    public void CreditButtonClicked()
+    {
+        SoundManager.Instance.PlayButton();
+
+        DisplayCredit();
+    }
+
+    public void BackButtonClicked()
+    {
+        SoundManager.Instance.PlayButton();
+
+        DisplayMainMenu(true);
     }
 }
