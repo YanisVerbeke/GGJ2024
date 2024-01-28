@@ -92,6 +92,7 @@ public class Player : MonoBehaviour
     {
         if (!_isHandThrown && !_isHandComing)
         {
+            CameraShaker.Instance.ShakeCamera();
             SoundManager.Instance.PlayLancer();
             _handDirection = (_hand.transform.position - transform.position).normalized;
             _handThrowTimer = _handThrowTimerValue;
