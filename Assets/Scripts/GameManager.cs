@@ -19,7 +19,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject _roamingScene;
     [SerializeField] private GameObject _qteScene;
-    private TargetDifficulties _targetDifficulty;
+    private TargetDifficulties _targetDifficulty = TargetDifficulties.EASY;
+    public TargetDifficulties TargetDifficulty { get { return _targetDifficulty; } set { _targetDifficulty = value; } }
 
     private int _currentLives;
 
@@ -166,21 +167,11 @@ public class GameManager : MonoBehaviour
         _roamingScene.SetActive(true);
         _qteScene.SetActive(false);
     }
+
     IEnumerator SwitchQteState( float transitionTime)
     {
         yield return new WaitForSeconds(transitionTime);
         _roamingScene.SetActive(false);
         _qteScene.SetActive(true);
-        Debug.Log(_qteScene);
-        Debug.Log(_qteScene.GetComponentInChildren<QteManager>());
-        Debug.Log(_targetDifficulty);
-
-
-        _qteScene.GetComponentInChildren<QteManager>().SetStatsFromDifficulty(_targetDifficulty);
-    }
-
-    public void SetCurrentDifficulty(TargetDifficulties difficulty)
-    {
-        _targetDifficulty = difficulty;
     }
 }

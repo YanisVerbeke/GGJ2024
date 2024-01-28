@@ -21,7 +21,7 @@ public class PlayerHand : MonoBehaviour
         if (collision.GetComponent<Target>() != null && _cooldown <= 0 && _isHandThrown)
         {
             //_cooldown = 10;
-            GameManager.Instance.SetCurrentDifficulty(collision.GetComponent<Target>().TargetDifficulty);
+            GameManager.Instance.TargetDifficulty = collision.GetComponent<Target>().TargetDifficulty;
             _player.TeleportToTarget(collision.transform);
         }
     }

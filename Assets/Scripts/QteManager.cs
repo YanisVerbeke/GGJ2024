@@ -11,23 +11,8 @@ using UnityEngine.UI;
 /// </summary>
 public class QteManager : MonoBehaviour
 {
-    //public static QteManager Instance { get; private set; }
-
-    // Actions and Inputs
-    private QTEInputActions _qteActions;
-    private InputAction[] _qteInputs;
-    private InputAction _selectedAction;
-
-    // Sprites and animamtions
-    private bool _isTurnedRight;
     [SerializeField]
-    private Image _qteImage;
-    [SerializeField]
-    private Sprite[] _sprites = new Sprite[12];
-    [SerializeField]
-    private Image _keySprite;
-    [SerializeField]
-    private TMP_Text _text;
+    private QteKey[] _qteKeys;
 
     // Difficulty setters
     private const int _numberOfDifficulties = 3;
@@ -35,7 +20,6 @@ public class QteManager : MonoBehaviour
     [SerializeField]
     private int _baseQteCounter;
     private int[] _basesQteCounterDifficulty = new int[_numberOfDifficulties] { 5, 10, 5 };
-    private int _currentQteCounter;
 
     [SerializeField]
     private int _numberOfQte;
@@ -55,32 +39,33 @@ public class QteManager : MonoBehaviour
         _won = false;
         _lose = false;
 
-        if (_qteActions == null)
+        // Default
+        int diff = GameManager.Instance.TargetDifficulty switch
         {
-            _qteActions = new QTEInputActions();
+            TargetDifficulties.EASY => 2,
+            TargetDifficulties.MEDIUM => 2,
+            _ => 2
+        };
+
+        Debug.Log("diff : " + diff);
+
+        _baseQteCounter = _basesQteCounterDifficulty[diff];
+        _numberOfQte = _numberOfQteAtSameTimeDifficulty[diff];
+        _secondsBeforeFailure = _secondsBeforeFailDifficulty[diff];
+
+        for (int i = 0; i < _qteKeys.Length; i++)
+        {
+            bool active = false;
+            if(i < _numberOfQte)
+            {
+                _qteKeys[i].BaseQteCounter = _baseQteCounter;
+                active = true;
+            }
+            Debug.Log("qte keys " + i + " active : " + active);
+            _qteKeys[i].gameObject.SetActive(active);
         }
-        _qteActions.QtePossibilities.Enable();
 
-        _qteInputs = new InputAction[12];
-        _qteInputs[0] = _qteActions.QtePossibilities.qte_1;
-        _qteInputs[1] = _qteActions.QtePossibilities.qte_2;
-        _qteInputs[2] = _qteActions.QtePossibilities.qte_3;
-        _qteInputs[3] = _qteActions.QtePossibilities.qte_4;
-        _qteInputs[4] = _qteActions.QtePossibilities.qte_5;
-        _qteInputs[5] = _qteActions.QtePossibilities.qte_6;
-        _qteInputs[6] = _qteActions.QtePossibilities.qte_7;
-        _qteInputs[7] = _qteActions.QtePossibilities.qte_8;
-        _qteInputs[8] = _qteActions.QtePossibilities.qte_9;
-        _qteInputs[9] = _qteActions.QtePossibilities.qte_10;
-        _qteInputs[10] = _qteActions.QtePossibilities.qte_11;
-        _qteInputs[11] = _qteActions.QtePossibilities.qte_12;
-
-        SelectNewInput();
-    }
-
-    private void OnDisable()
-    {
-        _qteActions.QtePossibilities.Disable();
+        StartCoroutine(TimeCountdown(_secondsBeforeFailure));
     }
 
     // Update is called once per frame
@@ -89,82 +74,36 @@ public class QteManager : MonoBehaviour
         if (!GameManager.Instance.IsQte())
             return;
 
-        if (_lose)
+        bool isOver = true;
+        for (int i = 0; i < _numberOfQte; i++)
         {
-            Debug.Log("Lose haha loser you lose loser");
-            GameManager.Instance.LoseLife();
+            if(_qteKeys[i].CurrentQteCounter <= 0)
+            {
+                _qteKeys[i].gameObject.SetActive(false);
+
+            } else
+            {
+                isOver = false;
+            }
+        }
+
+        if (isOver && !_won)
+        {
+            _won = true;
             GameManager.Instance.SwitchStateToRoaming();
         }
 
-        _text.text = _currentQteCounter.ToString();
-        if (!_won)
+        if (_lose)
         {
-            if (_selectedAction.triggered)
-            {
-                PressedAnim();
-                _currentQteCounter--;
-            }
-
-            if (_currentQteCounter <= 0 && !_won)
-            {
-                _won = true;
-                GameManager.Instance.SwitchStateToRoaming();
-            }
+            GameManager.Instance.LoseLife();
+            GameManager.Instance.SwitchStateToRoaming();
         }
-
-        if(_qteActions.QtePossibilities.Randmize.triggered)
-        {
-            SelectNewInput();
-        }
-
-
-    }
-
-    private void SelectNewInput()
-    {
-        _won = false;
-        _currentQteCounter = _baseQteCounter;
-        int rand = Random.Range(0, _qteInputs.Length);
-        _selectedAction = _qteInputs[rand];
-        _qteImage.sprite = _sprites[rand];
-        PressedAnim();
-        StartCoroutine(TimeCountdown(_secondsBeforeFailure));
-    }
-
-    private void PressedAnim()
-    {
-        //Rotation
-        int angle = _isTurnedRight ? 30 : -30;
-        _keySprite.transform.rotation = Quaternion.Euler(0, 0, angle);
-        _isTurnedRight = !_isTurnedRight;
-
-        StartCoroutine(SmallBig());
-
-    }
-    public void SetStatsFromDifficulty(TargetDifficulties difficulty)
-    {
-        int diff = difficulty switch
-        {
-            TargetDifficulties.EASY => 0,
-            TargetDifficulties.MEDIUM => 1,
-            _ => 2
-        };
-
-        _baseQteCounter = _basesQteCounterDifficulty[diff];
-        _numberOfQte = _numberOfQteAtSameTimeDifficulty[diff];
-        _secondsBeforeFailure = _secondsBeforeFailDifficulty[diff];
-    }
-
-    IEnumerator SmallBig()
-    {
-        _keySprite.transform.localScale = new Vector3(.8f, .8f, .8f);
-        yield return new WaitForSeconds(.1f);
-        _keySprite.transform.localScale = Vector3.one;
+        
     }
 
     IEnumerator TimeCountdown(int timeLeft)
     {
-        Debug.Log(timeLeft);
+       
         yield return new WaitForSeconds(1);
         if (timeLeft == 0) _lose = true;
         else StartCoroutine(TimeCountdown(timeLeft - 1));
