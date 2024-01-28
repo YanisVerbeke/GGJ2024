@@ -37,7 +37,6 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        DontDestroyOnLoad(this);
     }
 
     private void Start()
@@ -142,6 +141,7 @@ public class GameManager : MonoBehaviour
     {
         _currentState = GameState.GAMEOVER;
         OnGameOver?.Invoke(this, EventArgs.Empty);
+        MenuManager.Instance.DisplayGameOver();
     }
 
     public void TogglePause()
