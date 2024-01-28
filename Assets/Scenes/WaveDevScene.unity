@@ -2898,11 +2898,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
+  m_audioClip: {fileID: 8300000, guid: 9cf387bd231c2ae4b9ee4678de611b71, type: 3}
+  m_PlayOnAwake: 1
   m_Volume: 0.7
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -3009,6 +3009,8 @@ MonoBehaviour:
   _badKey: {fileID: 8300000, guid: ecc65c044c375e84fa422f56ef3a8d98, type: 3}
   _phase2: {fileID: 8300000, guid: aa991732a06680b4ea686dd5ca0b789f, type: 3}
   _transition: {fileID: 8300000, guid: 62b6fc494654b6046aec29184b72c5ca, type: 3}
+  _musicMenu: {fileID: 8300000, guid: ed91a98576259e44d92fe3a2352637c5, type: 3}
+  _musicGame: {fileID: 8300000, guid: 9cf387bd231c2ae4b9ee4678de611b71, type: 3}
 --- !u!1 &1170026871
 GameObject:
   m_ObjectHideFlags: 0

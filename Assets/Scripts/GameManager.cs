@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         // Init de tout le jeu je sais pas on verra
+        SoundManager.Instance.StartGameMusic();
         _currentLives = 3;
         OnGameStart?.Invoke(this, EventArgs.Empty);
         MenuManager.Instance.DisplayMainMenu(false);
@@ -115,6 +116,7 @@ public class GameManager : MonoBehaviour
 
     public void Menu()
     {
+        SoundManager.Instance.StartMenuMusic();
         Time.timeScale = 1;
         _currentState = GameState.MENU;
         MenuManager.Instance.DisplayMainMenu(true);

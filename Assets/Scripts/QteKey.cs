@@ -25,7 +25,7 @@ public class QteKey : MonoBehaviour
 
     // Counter
     private int _baseQteCounter;
-    public int BaseQteCounter { get { return _baseQteCounter; } set {  _baseQteCounter = value; } }
+    public int BaseQteCounter { get { return _baseQteCounter; } set { _baseQteCounter = value; } }
     private int _currentQteCounter;
     public int CurrentQteCounter { get { return _currentQteCounter; } }
 
@@ -63,6 +63,7 @@ public class QteKey : MonoBehaviour
 
         if (_selectedAction.triggered)
         {
+            SoundManager.Instance.PlayGoodKey();
             PressedAnim();
             _currentQteCounter--;
         }

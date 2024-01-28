@@ -22,6 +22,9 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip _phase2;
     [SerializeField] private AudioClip _transition;
 
+    [SerializeField] private AudioClip _musicMenu;
+    [SerializeField] private AudioClip _musicGame;
+
     private AudioSource _audioSource;
 
 
@@ -102,5 +105,19 @@ public class SoundManager : MonoBehaviour
     public void PlayTransition()
     {
         _audioSource.PlayOneShot(_transition);
+    }
+
+    public void StartMenuMusic()
+    {
+        _audioSource.clip = _musicMenu;
+        _audioSource.Stop();
+        _audioSource.Play();
+    }
+
+    public void StartGameMusic()
+    {
+        _audioSource.clip = _musicGame;
+        _audioSource.Stop();
+        _audioSource.Play();
     }
 }
