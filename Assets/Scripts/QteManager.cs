@@ -37,6 +37,9 @@ public class QteManager : MonoBehaviour
 
     private Animator _animator;
 
+    [SerializeField] private Transform _timerFillBar;
+    private float _timeLeft;
+
     private void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -74,7 +77,8 @@ public class QteManager : MonoBehaviour
         }
 
         _animator.SetTrigger("Level1");
-        StartCoroutine(TimeCountdown(_secondsBeforeFailure));
+        //StartCoroutine(TimeCountdown(_secondsBeforeFailure));
+        _timeLeft = _secondsBeforeFailure;
     }
 
     // Update is called once per frame
@@ -130,11 +134,22 @@ public class QteManager : MonoBehaviour
             GameManager.Instance.SwitchStateToRoaming();
         }
 
+        if (_timeLeft > 0f)
+        {
+            _timeLeft -= Time.deltaTime;
+        }
+        if (_timeLeft <= 0f)
+        {
+            _lose = true;
+        }
+
+        float timerNormalized = _timeLeft / _secondsBeforeFailure;
+        _timerFillBar.localScale = new Vector3(timerNormalized, 1, 1);
     }
 
     IEnumerator TimeCountdown(int timeLeft)
     {
-
+        _timeLeft = timeLeft;
         yield return new WaitForSeconds(1);
         if (timeLeft == 0) _lose = true;
         else StartCoroutine(TimeCountdown(timeLeft - 1));
