@@ -61,7 +61,7 @@ public class QteManager : MonoBehaviour
         for (int i = 0; i < _qteKeys.Length; i++)
         {
             bool active = false;
-            if(i < _numberOfQte)
+            if (i < _numberOfQte)
             {
                 _qteKeys[i].BaseQteCounter = _baseQteCounter;
                 active = true;
@@ -81,27 +81,27 @@ public class QteManager : MonoBehaviour
         bool isOver = true;
         for (int i = 0; i < _numberOfQte; i++)
         {
-            if(_qteKeys[i].CurrentQteCounter <= 0)
+            if (_qteKeys[i].CurrentQteCounter <= 0)
             {
                 _qteKeys[i].gameObject.SetActive(false);
 
-            } else
-            if (_currentQteCounter <= 4)
+            }
+            else
+            {
+                isOver = false;
+            }
+
+            if (_qteKeys[i].CurrentQteCounter <= 4)
             {
                 _animator.SetTrigger("Level3");
             }
-            else if (_currentQteCounter <= 8)
+            else if (_qteKeys[i].CurrentQteCounter <= 8)
             {
                 _animator.SetTrigger("Level2");
             }
             else
             {
                 _animator.SetTrigger("Level1");
-            }
-
-            if (_currentQteCounter <= 0 && !_won)
-            {
-                isOver = false;
             }
         }
 
@@ -116,12 +116,12 @@ public class QteManager : MonoBehaviour
             GameManager.Instance.LoseLife();
             GameManager.Instance.SwitchStateToRoaming();
         }
-        
+
     }
 
     IEnumerator TimeCountdown(int timeLeft)
     {
-       
+
         yield return new WaitForSeconds(1);
         if (timeLeft == 0) _lose = true;
         else StartCoroutine(TimeCountdown(timeLeft - 1));
