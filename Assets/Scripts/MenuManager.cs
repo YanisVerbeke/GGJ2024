@@ -10,6 +10,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject _menuContainer;
     [SerializeField] private GameObject _pauseContainer;
     [SerializeField] private GameObject _gameOverContainer;
+    [SerializeField] private GameObject _uiPlayContainer;
 
     private void Awake()
     {
@@ -29,6 +30,7 @@ public class MenuManager : MonoBehaviour
         _menuContainer.SetActive(active);
         _pauseContainer.SetActive(false);
         _gameOverContainer.SetActive(false);
+        _uiPlayContainer.SetActive(false);
     }
 
     public void DisplayPause(bool active)
@@ -39,8 +41,13 @@ public class MenuManager : MonoBehaviour
     public void DisplayGameOver()
     {
         _gameOverContainer.SetActive(true);
+        _uiPlayContainer.SetActive(false);
     }
 
+    public void DisplayPlay(bool active)
+    {
+        _uiPlayContainer.SetActive(active);
+    }
 
     public void PlayButtonClicked()
     {

@@ -85,6 +85,7 @@ public class GameManager : MonoBehaviour
         _lastPlayedState = _currentState;
         SpawnTransition();
         StartCoroutine(SwitchQteState(_transitionTime));
+        MenuManager.Instance.DisplayPlay(false);
     }
 
     public bool IsRoaming()
@@ -97,6 +98,7 @@ public class GameManager : MonoBehaviour
         _currentState = GameState.ROAMING;
         _lastPlayedState = _currentState;
         StartCoroutine(SwitchRoamingState(0));
+        MenuManager.Instance.DisplayPlay(true);
     }
 
     public int GetCurrentLives()
