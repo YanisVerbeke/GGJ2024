@@ -40,6 +40,8 @@ public class QteManager : MonoBehaviour
     [SerializeField] private Transform _timerFillBar;
     private float _timeLeft;
 
+    private bool _isChecked = false;
+
     private void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -50,6 +52,7 @@ public class QteManager : MonoBehaviour
         // Reset
         _won = false;
         _lose = false;
+        _isChecked = false;
 
         // Default
         int diff = GameManager.Instance.TargetDifficulty switch
@@ -66,14 +69,17 @@ public class QteManager : MonoBehaviour
         _totalGlobalCount = 0;
         for (int i = 0; i < _qteKeys.Length; i++)
         {
-            bool active = false;
             if (i < _numberOfQte)
             {
+                _qteKeys[i].gameObject.SetActive(true);
                 _qteKeys[i].BaseQteCounter = _baseQteCounter;
                 _totalGlobalCount += _baseQteCounter;
-                active = true;
             }
-            _qteKeys[i].gameObject.SetActive(active);
+            else
+            {
+                _qteKeys[i].gameObject.SetActive(false);
+            }
+            
         }
 
         _animator.SetTrigger("Level1");
@@ -81,11 +87,14 @@ public class QteManager : MonoBehaviour
         _timeLeft = _secondsBeforeFailure;
     }
 
+
     // Update is called once per frame
     void Update()
     {
         if (!GameManager.Instance.IsQte())
             return;
+
+        if (!_isChecked) CheckIfSimilarKeys();
 
         // Count
         bool isOver = true;
@@ -96,16 +105,12 @@ public class QteManager : MonoBehaviour
             if (_qteKeys[i].CurrentQteCounter <= 0)
             {
                 _qteKeys[i].gameObject.SetActive(false);
-
             }
             else
             {
                 isOver = false;
             }
-
-
         }
-        Debug.Log(_currentGlobaCount);
 
         // Laugh animation
         if (_currentGlobaCount <= _totalGlobalCount * 40 /100) //40%
@@ -148,6 +153,24 @@ public class QteManager : MonoBehaviour
         float timerNormalized = _timeLeft / _secondsBeforeFailure;
         _timerFillBar.localScale = new Vector3(timerNormalized, 1, 1);
     }
+
+    private void CheckIfSimilarKeys()
+    {
+
+        for (int i = 0; i < _qteKeys.Length; i++)
+        {
+            if (i > 0)
+            {
+                if (_qteKeys[i].SelectedRandom == _qteKeys[i - 1].SelectedRandom)
+                {
+                    Debug.Log("_qteKeys : " + _qteKeys[i]);
+                    _qteKeys[i].SetNewInputAction();
+                }
+            }
+        }
+        _isChecked = true;
+    }
+
 
     IEnumerator TimeCountdown(int timeLeft)
     {
