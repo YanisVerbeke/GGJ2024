@@ -107,12 +107,14 @@ public class QteManager : MonoBehaviour
 
         if (isOver && !_won)
         {
+            SoundManager.Instance.PlayQTEWin();
             _won = true;
             GameManager.Instance.SwitchStateToRoaming();
         }
 
         if (_lose)
         {
+            SoundManager.Instance.PlayQTELose();
             GameManager.Instance.LoseLife();
             GameManager.Instance.SwitchStateToRoaming();
         }

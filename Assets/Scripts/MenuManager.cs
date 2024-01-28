@@ -38,16 +38,20 @@ public class MenuManager : MonoBehaviour
 
     public void PlayButtonClicked()
     {
+        SoundManager.Instance.PlayButton();
         GameManager.Instance.StartGame();
     }
 
     public void ResumeButtonClicked()
     {
+        SoundManager.Instance.PlayButton();
         GameManager.Instance.Resume();
     }
 
     public void QuitButtonClicked()
     {
+        SoundManager.Instance.PlayButton();
+
         Application.Quit();
     }
 }

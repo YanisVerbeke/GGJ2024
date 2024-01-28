@@ -94,6 +94,7 @@ public class Player : MonoBehaviour
         {
             _handDirection = (_hand.transform.position - transform.position).normalized;
             _handThrowTimer = _handThrowTimerValue;
+            SoundManager.Instance.PlayLancer();
         }
     }
 
@@ -101,6 +102,7 @@ public class Player : MonoBehaviour
     {
         if (_isHandThrown)
         {
+            SoundManager.Instance.PlayGrab();
             transform.position = (Vector2)target.position + Vector2.ClampMagnitude(transform.position - target.position, 2f);
             ResetHandThrow();
             GameManager.Instance.SwitchStateToQte();
