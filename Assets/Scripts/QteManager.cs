@@ -20,6 +20,8 @@ public class QteManager : MonoBehaviour
     [SerializeField]
     private int _baseQteCounter;
     private int[] _basesQteCounterDifficulty = new int[_numberOfDifficulties] { 5, 10, 5 };
+    private int _totalGlobalCount;
+    private int _currentGlobaCount;
 
     [SerializeField]
     private int _numberOfQte;
@@ -34,6 +36,9 @@ public class QteManager : MonoBehaviour
     private bool _lose;
 
     private Animator _animator;
+
+    [SerializeField] private Transform _timerFillBar;
+    private float _timeLeft;
 
     private void Awake()
     {
@@ -58,18 +63,22 @@ public class QteManager : MonoBehaviour
         _numberOfQte = _numberOfQteAtSameTimeDifficulty[diff];
         _secondsBeforeFailure = _secondsBeforeFailDifficulty[diff];
 
+        _totalGlobalCount = 0;
         for (int i = 0; i < _qteKeys.Length; i++)
         {
             bool active = false;
             if (i < _numberOfQte)
             {
                 _qteKeys[i].BaseQteCounter = _baseQteCounter;
+                _totalGlobalCount += _baseQteCounter;
                 active = true;
             }
             _qteKeys[i].gameObject.SetActive(active);
         }
 
-        StartCoroutine(TimeCountdown(_secondsBeforeFailure));
+        _animator.SetTrigger("Level1");
+        //StartCoroutine(TimeCountdown(_secondsBeforeFailure));
+        _timeLeft = _secondsBeforeFailure;
     }
 
     // Update is called once per frame
@@ -78,9 +87,12 @@ public class QteManager : MonoBehaviour
         if (!GameManager.Instance.IsQte())
             return;
 
+        // Count
         bool isOver = true;
+        _currentGlobaCount = 0;
         for (int i = 0; i < _numberOfQte; i++)
         {
+            _currentGlobaCount += _qteKeys[i].CurrentQteCounter;
             if (_qteKeys[i].CurrentQteCounter <= 0)
             {
                 _qteKeys[i].gameObject.SetActive(false);
@@ -91,20 +103,25 @@ public class QteManager : MonoBehaviour
                 isOver = false;
             }
 
-            if (_qteKeys[i].CurrentQteCounter <= 4)
-            {
-                _animator.SetTrigger("Level3");
-            }
-            else if (_qteKeys[i].CurrentQteCounter <= 8)
-            {
-                _animator.SetTrigger("Level2");
-            }
-            else
-            {
-                _animator.SetTrigger("Level1");
-            }
+
+        }
+        Debug.Log(_currentGlobaCount);
+
+        // Laugh animation
+        if (_currentGlobaCount <= _totalGlobalCount * 40 /100) //40%
+        {
+            _animator.SetTrigger("Level3");
+        }
+        else if (_currentGlobaCount <= _totalGlobalCount * 80 / 100) // 80%
+        {
+            _animator.SetTrigger("Level2");
+        }
+        else
+        {
+            _animator.SetTrigger("Level1");
         }
 
+        // Win or Lose
         if (isOver && !_won)
         {
             SoundManager.Instance.PlayQTEWin();
@@ -119,11 +136,22 @@ public class QteManager : MonoBehaviour
             GameManager.Instance.SwitchStateToRoaming();
         }
 
+        if (_timeLeft > 0f)
+        {
+            _timeLeft -= Time.deltaTime;
+        }
+        if (_timeLeft <= 0f)
+        {
+            _lose = true;
+        }
+
+        float timerNormalized = _timeLeft / _secondsBeforeFailure;
+        _timerFillBar.localScale = new Vector3(timerNormalized, 1, 1);
     }
 
     IEnumerator TimeCountdown(int timeLeft)
     {
-
+        _timeLeft = timeLeft;
         yield return new WaitForSeconds(1);
         if (timeLeft == 0) _lose = true;
         else StartCoroutine(TimeCountdown(timeLeft - 1));
