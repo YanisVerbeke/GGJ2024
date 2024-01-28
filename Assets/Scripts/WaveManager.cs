@@ -9,7 +9,7 @@ public class WaveManager : MonoBehaviour
 
     [SerializeField] private List<Transform> _waveSpawnerList;
 
-    private int _waveNumber = 12;
+    private int _waveNumber = 1;
     public int WaveNumber { get { return _waveNumber; } }
 
     private List<GameObject> _unitToSpawn;
