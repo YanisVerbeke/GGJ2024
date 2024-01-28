@@ -82,8 +82,10 @@ public class QteKey : MonoBehaviour
     /// </summary>
     public void SetNewInputAction()
     {
-        int newRandom = _selectedRandom + Random.Range(0, 7);
-        int r =  newRandom > _qteInputs.Length - 1 ? newRandom - _qteInputs.Length : newRandom;
+        int newRandom = Random.Range(0, 6);
+        int r =  newRandom + _selectedRandom > _qteInputs.Length - 1 ? 
+            _selectedRandom - newRandom : 
+            _selectedRandom + newRandom;
 
         _selectedAction = _qteInputs[r];
         _qteImage.sprite = _sprites[r];

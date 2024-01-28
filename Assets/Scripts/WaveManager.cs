@@ -27,6 +27,8 @@ public class WaveManager : MonoBehaviour
 
     public event EventHandler OnWaveFinished;
 
+    private float _waitTimeBetweenWaves = 4f;
+
 
     private void Awake()
     {
@@ -67,7 +69,7 @@ public class WaveManager : MonoBehaviour
         {
             // La wave se start avec un cooldown mais à terme faudra détecter quand la wave d'avant est finie et commencer à ce moment là
             StartNewWave();
-            _waveCooldown = 10f;
+            _waveCooldown = _waitTimeBetweenWaves;
         }
     }
 

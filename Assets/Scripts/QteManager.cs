@@ -162,7 +162,6 @@ public class QteManager : MonoBehaviour
             {
                 if (_qteKeys[i].SelectedRandom == _qteKeys[i - 1].SelectedRandom)
                 {
-                    Debug.Log("_qteKeys : " + _qteKeys[i]);
                     _qteKeys[i].SetNewInputAction();
                 }
             }
