@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 919b9f1ded665ea4096ac3b7e5d308a5
+guid: a062cdf7be0928e4894a1770550b96ef
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -49,7 +49,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 400
-  spriteBorder: {x: 657, y: 248, z: 690, w: 285}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -136,13 +136,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Key_0
+      name: Guili_SpriteSheet_0
       rect:
         serializedVersion: 2
-        x: 667
-        y: 264
-        width: 548
-        height: 520
+        x: 119
+        y: 0
+        width: 649
+        height: 922
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,8 +150,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0bc3e329e19c30c46a3b1ec8cc2ca7a9
-      internalID: 816942908
+      spriteID: 7e8ec051d9a02fc4f9aeded970c8cd22
+      internalID: 1642439866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Guili_SpriteSheet_1
+      rect:
+        serializedVersion: 2
+        x: 923
+        y: 0
+        width: 646
+        height: 913
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02f259d54b822874b914694dfff298aa
+      internalID: -544901268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Guili_SpriteSheet_2
+      rect:
+        serializedVersion: 2
+        x: 1724
+        y: 0
+        width: 646
+        height: 913
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2cdbf31c1e9dd4843bd009304567bad1
+      internalID: 42633224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Guili_SpriteSheet_3
+      rect:
+        serializedVersion: 2
+        x: 2534
+        y: 331
+        width: 358
+        height: 594
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42b5089a688e61846b584bf1611e1c48
+      internalID: -2117930758
       vertices: []
       indices: 
       edges: []
@@ -160,14 +223,17 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Key_0: 816942908
+      Guili_SpriteSheet_0: 1642439866
+      Guili_SpriteSheet_1: -544901268
+      Guili_SpriteSheet_2: 42633224
+      Guili_SpriteSheet_3: -2117930758
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

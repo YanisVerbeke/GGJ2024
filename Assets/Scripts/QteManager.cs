@@ -34,6 +34,13 @@ public class QteManager : MonoBehaviour
     [SerializeField]
     private TMP_Text _text;
 
+    private Animator _animator;
+
+    private void Awake()
+    {
+        _animator = GetComponent<Animator>();
+    }
+
     private void OnEnable()
     {
         if (_qteActions == null)
@@ -79,6 +86,19 @@ public class QteManager : MonoBehaviour
                 _currentQteCounter--;
             }
 
+            if (_currentQteCounter <= 4)
+            {
+                _animator.SetTrigger("Level3");
+            }
+            else if (_currentQteCounter <= 8)
+            {
+                _animator.SetTrigger("Level2");
+            }
+            else
+            {
+                _animator.SetTrigger("Level1");
+            }
+
             if (_currentQteCounter <= 0 && !_won)
             {
                 _won = true;
@@ -86,7 +106,7 @@ public class QteManager : MonoBehaviour
             }
         }
 
-        if(_qteActions.QtePossibilities.Randmize.triggered)
+        if (_qteActions.QtePossibilities.Randmize.triggered)
         {
             SelectNewInput();
         }
