@@ -28,7 +28,7 @@ public class QteManager : MonoBehaviour
 
     [SerializeField]
     private int _secondsBeforeFailure;
-    private int[] _secondsBeforeFailDifficulty = new int[_numberOfDifficulties] { 3, 3, 3 };
+    private int[] _secondsBeforeFailDifficulty = new int[_numberOfDifficulties] { 2, 2, 2 };
 
     // Victory and Defeat
     private bool _won;
