@@ -60,6 +60,8 @@ public class QteManager : MonoBehaviour
             TargetDifficulties.MEDIUM => 1,
             _ => 2
         };
+        Debug.Log("Diificulty : " + diff);
+
 
         _baseQteCounter = _basesQteCounterDifficulty[diff];
         _numberOfQte = _numberOfQteAtSameTimeDifficulty[diff];
@@ -70,9 +72,9 @@ public class QteManager : MonoBehaviour
         {
             if (i < _numberOfQte)
             {
-                _qteKeys[i].gameObject.SetActive(true);
                 _qteKeys[i].BaseQteCounter = _baseQteCounter;
                 _totalGlobalCount += _baseQteCounter;
+                _qteKeys[i].gameObject.SetActive(true);
             }
             else
             {
@@ -93,8 +95,6 @@ public class QteManager : MonoBehaviour
         if (!GameManager.Instance.IsQte())
             return;
 
-        if (!_isChecked) CheckIfSimilarKeys();
-
         // Count
         bool isOver = true;
         _currentGlobaCount = 0;
@@ -110,6 +110,7 @@ public class QteManager : MonoBehaviour
                 isOver = false;
             }
         }
+        if (!_isChecked) CheckIfSimilarKeys();
 
         // Laugh animation
         if (_currentGlobaCount <= _totalGlobalCount * 40 /100) //40%
